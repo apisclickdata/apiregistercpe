@@ -790,7 +790,7 @@ class TipoCPEListView(ListCreateAPIView):
     def get(self, request):  
         cursor = connection.cursor()
     
-        cursor.callproc('dbvisorcpe.sp_ObtenerTipoCPE') 
+        cursor.callproc('dbclickdatatest.sp_ObtenerTipoCPE') 
         columns = [d[0] for d in cursor.description]
 
         records =  [dict(zip(columns, row)) for row in cursor.fetchall()]
@@ -812,7 +812,7 @@ class EstadoListView(ListCreateAPIView):
     def get(self, request):  
         cursor = connection.cursor()
     
-        cursor.callproc('dbvisorcpe.sp_ObtenerEstados') 
+        cursor.callproc('dbclickdatatest.sp_ObtenerEstados') 
         columns = [d[0] for d in cursor.description]
 
         records =  [dict(zip(columns, row)) for row in cursor.fetchall()]
@@ -853,7 +853,7 @@ class CPEListView(ListCreateAPIView):
             cursor = connection.cursor()
  
             param = (tipoCpe, estadoCpe, rucReceptor, serieCpe, numeroCpe, fechaDesde, fechaHasta, idEmisor,)
-            cursor.callproc('dbvisorcpe.sp_ObtenerCPE', param) 
+            cursor.callproc('dbclickdatatest.sp_ObtenerCPE', param) 
             columns = [d[0] for d in cursor.description]
  
             records =  [dict(zip(columns, row)) for row in cursor.fetchall()]
