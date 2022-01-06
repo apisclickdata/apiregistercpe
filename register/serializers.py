@@ -24,14 +24,14 @@ class ActualizacionTicketSerializer(serializers.ModelSerializer):
 class ActualizacionCPESerializer(serializers.ModelSerializer):
     class Meta:
         model = CPEModel
-        exclude = ['serieCpe', 'numeroCpe','fechaCpe','totalCpe','XmlCpe','tipocpeId','emisorId', 'receptorId','fechapublicacionCpe','monedaCpe','fechavencCpe','usuId'] 
+        exclude = ['serieCpe', 'numeroCpe','fechaCpe','totalCpe','importeCpe','XmlCpe','tipocpeId','emisorId', 'receptorId','fechapublicacionCpe','monedaCpe','fechavencCpe','usuId'] 
     def update(self):
         self.instance.idCdr = self.validated_data.get('idCdr', self.instance.idCdr) 
-        self.instance.fechaCdr = self.validated_data.get('fechaCdr', self.instance.idCdr) 
-        self.instance.horaCdr = self.validated_data.get('horaCdr', self.instance.idCdr) 
-        self.instance.statusCdr = self.validated_data.get('statusCdr', self.instance.idCdr) 
-        self.instance.estadoId = self.validated_data.get('estadoId', self.instance.idCdr) 
-        self.instance.mensajeCdr = self.validated_data.get('mensajeCdr', self.instance.idCdr) 
+        self.instance.fechaCdr = self.validated_data.get('fechaCdr', self.instance.fechaCdr) 
+        self.instance.horaCdr = self.validated_data.get('horaCdr', self.instance.horaCdr) 
+        self.instance.statusCdr = self.validated_data.get('statusCdr', self.instance.statusCdr) 
+        self.instance.estadoId = self.validated_data.get('estadoId', self.instance.estadoId) 
+        self.instance.mensajeCdr = self.validated_data.get('mensajeCdr', self.instance.mensajeCdr) 
         self.instance.CdrCpe = self.validated_data.get('CdrCpe', self.instance.CdrCpe) 
         self.instance.save()
         return self.instance

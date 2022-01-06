@@ -485,6 +485,7 @@ class ActualizacionCPEView(CreateAPIView):
             cpe = xmltodict.parse(xml.read())
             fecha = str(datetime.now().timestamp()).replace('.','')
             nombre_seguro = secure_filename(fecha  + '-' + xml.name)
+            
             fs.save('staticfiles/' + nombre_seguro, xml) 
 
             infoCpe = idCpe.split('-')
@@ -499,7 +500,6 @@ class ActualizacionCPEView(CreateAPIView):
             estadoanulado = '02'
             estadoAnuladoId = EstadoModel.objects.get(estadoCod = estadoanulado).estadoId
  
- 
             cpeVal = []
             try:
                 cpeVal = self.get_queryset().filter(serieCpe = seriecpe, numeroCpe = numerocpe, tipocpeId = tipocpeId, emisorId = emisorId).first() 
@@ -508,6 +508,7 @@ class ActualizacionCPEView(CreateAPIView):
                     cpeRef = self.get_queryset().filter(serieCpe = cpeVal.serierefCpe, numeroCpe = cpeVal.numerorefCpe, tipocpeId = cpeVal.tipocperefId, emisorId = cpeVal.emisorId).first() 
                   
  
+            
             except ValueError:
                 return Response({
                     'status' : False,
@@ -542,18 +543,18 @@ class ActualizacionCPEView(CreateAPIView):
             dicCdr.setdefault('statusCdr', statusCdr)
             dicCdr.setdefault('estadoId', estadoId) 
             dicCdr.setdefault('mensajeCdr', mensajeCdr) 
-  
+ 
             try:   
                 s3.upload_file('staticfiles/' + nombre_seguro, bucketaws + 'cdr', nombre_seguro, ExtraArgs={'ACL': 'public-read'})
                 fs.delete(nombre_seguro)
                 dicCdr.setdefault('CdrCpe', 'https://'+bucketaws+'cdr.s3.us-east-2.amazonaws.com/' + nombre_seguro)
-                
- 
+
                 respuesta = self.serializer_class(cpeVal, data=dicCdr)  
  
                 if respuesta.is_valid(raise_exception=True): 
+                    
                     resultado = respuesta.update()
-                     
+                    
                     if((tipocpe == '07') or (tipocpe == '08')):    
                         CPEModel.objects.filter(cpeId=cpeRef.cpeId).update(estadoId = estadoAnuladoId)
  
