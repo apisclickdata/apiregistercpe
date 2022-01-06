@@ -17,7 +17,7 @@ from django.db import connection
                                    
 os.environ["AWS_ACCESS_KEY_ID"] = "AKIATWLBE4BJTSDWSMUY"
 os.environ["AWS_SECRET_ACCESS_KEY"] = "ruc9NdIjJG6KH4f6vRBBWfYQbavmINvDfbIZKh1Z"
-bucketaws = 'testclickdata' 
+bucketaws = 'clickdata' 
 
 # Create your views here.
 class RegistroCPEView(CreateAPIView):
@@ -790,7 +790,7 @@ class TipoCPEListView(ListCreateAPIView):
     def get(self, request):  
         cursor = connection.cursor()
     
-        cursor.callproc('dbclickdatatest.sp_ObtenerTipoCPE') 
+        cursor.callproc('dbclickdata.sp_ObtenerTipoCPE') 
         columns = [d[0] for d in cursor.description]
 
         records =  [dict(zip(columns, row)) for row in cursor.fetchall()]
@@ -812,7 +812,7 @@ class EstadoListView(ListCreateAPIView):
     def get(self, request):  
         cursor = connection.cursor()
     
-        cursor.callproc('dbclickdatatest.sp_ObtenerEstados') 
+        cursor.callproc('dbclickdata.sp_ObtenerEstados') 
         columns = [d[0] for d in cursor.description]
 
         records =  [dict(zip(columns, row)) for row in cursor.fetchall()]
@@ -853,7 +853,7 @@ class CPEListView(ListCreateAPIView):
             cursor = connection.cursor()
  
             param = (tipoCpe, estadoCpe, rucReceptor, serieCpe, numeroCpe, fechaDesde, fechaHasta, idEmisor,)
-            cursor.callproc('dbclickdatatest.sp_ObtenerCPE', param) 
+            cursor.callproc('dbclickdata.sp_ObtenerCPE', param) 
             columns = [d[0] for d in cursor.description]
  
             records =  [dict(zip(columns, row)) for row in cursor.fetchall()]
