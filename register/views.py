@@ -539,7 +539,7 @@ class ActualizacionCPEView(CreateAPIView):
             dicCdr = dict()
             dicCdr.setdefault('idCdr', idCdr)
             dicCdr.setdefault('fechaCdr', fechaCdr[0:10])
-            dicCdr.setdefault('horaCdr', horaCdr)
+            dicCdr.setdefault('horaCdr', horaCdr[0:8])
             dicCdr.setdefault('statusCdr', statusCdr)
             dicCdr.setdefault('estadoId', estadoId) 
             dicCdr.setdefault('mensajeCdr', mensajeCdr) 
