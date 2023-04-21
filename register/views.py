@@ -589,7 +589,7 @@ class ActualizacionCPEView(CreateAPIView):
                 }, status=400)
 
             fechaCdr = cpe['ar:ApplicationResponse']['cbc:ResponseDate']
-            statusCdr = cpe['ar:ApplicationResponse']['cac:DocumentResponse']['cac:Response']['cbc:ResponseCode']
+            statusCdr = cpe['ar:ApplicationResponse']['cac:DocumentResponse']['cac:Response']['cbc:ResponseCode']['#text']
             mensajeCdr = cpe['ar:ApplicationResponse']['cac:DocumentResponse']['cac:Response']['cbc:Description']
 
             print('fechaCdr: ' + fechaCdr)
