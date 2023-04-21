@@ -593,12 +593,14 @@ class ActualizacionCPEView(CreateAPIView):
 
             statusCdr = ''
             try:
-                statusCdr = cpe['ar:ApplicationResponse']['cac:DocumentResponse']['cac:Response']['cbc:ResponseCode']['#text']
+                statusCdr = cpe['ar:ApplicationResponse']['cac:DocumentResponse']['cac:Response']['cbc:ResponseCode']
             except ValueError:
                 print('No se recuperó el código de respuesta')
 
+            print('statusCdr22222: ' + statusCdr)
+
             if (statusCdr == ''):
-                statusCdr = cpe['ar:ApplicationResponse']['cac:DocumentResponse']['cac:Response']['cbc:ResponseCode']
+                statusCdr = cpe['ar:ApplicationResponse']['cac:DocumentResponse']['cac:Response']['cbc:ResponseCode']['#text']
 
             print('fechaCdr: ' + fechaCdr)
             print('statusCdr: ' + statusCdr)
