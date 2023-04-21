@@ -588,18 +588,16 @@ class ActualizacionCPEView(CreateAPIView):
                     'message': 'No existe el comprobante'
                 }, status=400)
 
+            validador = cpe['ar:ApplicationResponse']['cac:Signature']['cbc:ID']
+
+            print('validador: ' + validador)
+
             fechaCdr = cpe['ar:ApplicationResponse']['cbc:ResponseDate']
             mensajeCdr = cpe['ar:ApplicationResponse']['cac:DocumentResponse']['cac:Response']['cbc:Description']
 
-            statusCdr = ''
-            try:
+            if (validador == 'SignSUNAT'):
                 statusCdr = cpe['ar:ApplicationResponse']['cac:DocumentResponse']['cac:Response']['cbc:ResponseCode']
-            except ValueError:
-                print('No se recuperó el código de respuesta')
-
-            print('statusCdr22222: ' + statusCdr)
-
-            if (statusCdr == ''):
+            else:
                 statusCdr = cpe['ar:ApplicationResponse']['cac:DocumentResponse']['cac:Response']['cbc:ResponseCode']['#text']
 
             print('fechaCdr: ' + fechaCdr)
