@@ -572,8 +572,6 @@ class ActualizacionCPEView(CreateAPIView):
             estadoAnuladoId = EstadoModel.objects.get(
                 estadoCod=estadoanulado).estadoId
 
-            statusCdr = ''
-
             cpeVal = []
             try:
                 cpeVal = self.get_queryset().filter(serieCpe=seriecpe, numeroCpe=numerocpe,
@@ -643,7 +641,7 @@ class ActualizacionCPEView(CreateAPIView):
                     return Response({
                         'status': False,
                         'content': None,
-                        'message': 'Ocurrió  un error al actualizar el CPE ' + statusCdr
+                        'message': 'Ocurrió  un error al actualizar el CPE '
                     }, status=400)
 
             except ClientError as e:
