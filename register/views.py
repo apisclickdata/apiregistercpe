@@ -592,6 +592,10 @@ class ActualizacionCPEView(CreateAPIView):
             statusCdr = cpe['ar:ApplicationResponse']['cac:DocumentResponse']['cac:Response']['cbc:ResponseCode']
             mensajeCdr = cpe['ar:ApplicationResponse']['cac:DocumentResponse']['cac:Response']['cbc:Description']
 
+            print('fechaCdr: ' + fechaCdr)
+            print('statusCdr: ' + statusCdr)
+            print('mensajeCdr: ' + mensajeCdr)
+
             if (statusCdr == '0'):
                 idCdr = cpe['ar:ApplicationResponse']['cbc:ID']
                 horaCdr = cpe['ar:ApplicationResponse']['cbc:ResponseTime']
