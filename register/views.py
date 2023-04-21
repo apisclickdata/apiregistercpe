@@ -643,7 +643,7 @@ class ActualizacionCPEView(CreateAPIView):
                     return Response({
                         'status': False,
                         'content': None,
-                        'message': 'Ocurrió  un error al actualizar el CPE ' +
+                        'message': 'Ocurrió  un error al actualizar el CPE '
                     }, status=400)
 
             except ClientError as e:
