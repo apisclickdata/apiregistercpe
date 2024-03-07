@@ -2,7 +2,7 @@ from pathlib import Path
 from datetime import timedelta
 import os
 
-# import django_heroku
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -122,4 +122,4 @@ CORS_ALLOW_ALL_ORIGINS = True
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-# django_heroku.settings(locals(), databases=False, allowed_hosts=False)
+django_heroku.settings(locals(), databases=False, allowed_hosts=False)
